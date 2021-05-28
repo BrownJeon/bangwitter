@@ -6,7 +6,6 @@ const BangWeet = ({bangWeetObj, isOwner}) => {
     const [newBangWeet, setNewBangWeet] = useState(bangWeetObj.text);
     const onDeleteClick = async () => {
         const ok = window.confirm("삭제하시겠습니까?");
-        console.log(ok);
         if (ok) {
             await dbService.doc(`bangWeets/${bangWeetObj.id}`).delete();
         }
@@ -14,7 +13,6 @@ const BangWeet = ({bangWeetObj, isOwner}) => {
     const toggleEditting = () => setEditing((prev) => !prev);
     const onSubmit = async (event) => {
         event.preventDefault();
-        console.log(newBangWeet)
         await dbService.doc(`bangWeets/${bangWeetObj.id}`).update({
             text: newBangWeet
         });
@@ -29,12 +27,17 @@ const BangWeet = ({bangWeetObj, isOwner}) => {
         <div>
             {editing ?
                 <>
-                    <form onSubmit={onSubmit}>
-                        <input type="text" placeholder="edit your bangWeet" onChange={onChange} value={newBangWeet}
-                               required/>
-                        <input type="submit" value="update bangWeet" />
-                    </form>
-                    <button onClick={toggleEditting}>Cancel</button>
+                    {isOwner && (
+                        <>
+                            <form onSubmit={onSubmit}>
+                                <input type="text" placeholder="edit your bangWeet" onChange={onChange}
+                                       value={newBangWeet}
+                                       required/>
+                                <input type="submit" value="update bangWeet"/>
+                            </form>
+                            <button onClick={toggleEditting}>Cancel</button>
+                        </>
+                    )}
                 </>
                 :
                 <>
