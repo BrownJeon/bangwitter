@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import {dbService} from "../fbase";
+import BangWeet from "../components/BangWeet";
 
 const Home = ({userObj}) => {
     const [bangWeet, setBangWeet] = useState("");
@@ -44,9 +45,7 @@ const Home = ({userObj}) => {
             </form>
             <div>
                 {bangWeets.map((bangWeet) => (
-                    <div key={bangWeet.id}>
-                        <h4>{bangWeet.text}</h4>
-                    </div>
+                    <BangWeet key={bangWeet.id} bangWeetObj={bangWeet} isOwner={bangWeet.creatorId === userObj.uid}/>
                 ))}
             </div>
         </div>
