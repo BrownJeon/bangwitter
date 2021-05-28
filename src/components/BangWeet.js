@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {dbService} from "../fbase";
+import {dbService, storageService} from "../fbase";
 
 const BangWeet = ({bangWeetObj, isOwner}) => {
     const [editing, setEditing] = useState(false);
@@ -7,6 +7,7 @@ const BangWeet = ({bangWeetObj, isOwner}) => {
     const onDeleteClick = async () => {
         const ok = window.confirm("삭제하시겠습니까?");
         if (ok) {
+            await storageService.refFromURL(bangWeetObj.attachmentUrl).delete();
             await dbService.doc(`bangWeets/${bangWeetObj.id}`).delete();
         }
     }
