@@ -42,6 +42,11 @@ const BangWeet = ({bangWeetObj, isOwner}) => {
                 :
                 <>
                     <h4>{bangWeetObj.text}</h4>
+                    {bangWeetObj.attachmentUrl && (
+                        <>
+                            <img alt="attachment" src={bangWeetObj.attachmentUrl} width="100px" height="100px" />
+                        </>
+                    )}
                     {isOwner && (
                         <>
                             <button onClick={toggleEditting}>Edit bangWeet</button>

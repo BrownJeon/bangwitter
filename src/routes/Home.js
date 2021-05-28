@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
-import {dbService} from "../fbase";
+import {dbService, storageService} from "../fbase";
 import BangWeet from "../components/BangWeet";
+import { v4 as uuidv4} from "uuid";
 
 const Home = ({userObj}) => {
     const [bangWeet, setBangWeet] = useState("");
@@ -19,11 +20,20 @@ const Home = ({userObj}) => {
 
     const onSubmit = async (event) => {
         event.preventDefault();
-        await dbService.collection("bangWeets").add({
+
+        let attachmentUrl = "";
+        if (attachment) {
+            const attachmentRef = storageService.ref().child(`${userObj.uid}/${uuidv4()}`);
+            const response = await attachmentRef.putString(attachment, "data_url");
+            attachmentUrl = await response.ref.getDownloadURL();
+        }
+        const bweet = {
             text: bangWeet,
             createAt: Date.now(),
-            creatorId: userObj.uid
-        });
+            creatorId: userObj.uid,
+            attachmentUrl
+        }
+        await dbService.collection("bangWeets").add(bweet);
         setBangWeet("");
     };
     const onChange = (event) => {
@@ -58,7 +68,7 @@ const Home = ({userObj}) => {
                 <input type="submit" value="BangWeet"/>
                 {attachment && (
                     <div>
-                        <img src={attachment} width="50px" height="50px" />
+                        <img alt="uploadFile" src={attachment} width="50px" height="50px" />
                         <button onClick={onClearAttachment}>clear</button>
                     </div>
                 )}
