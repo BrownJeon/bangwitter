@@ -3,7 +3,7 @@ import {authService, dbService} from "../fbase";
 import {useHistory} from "react-router-dom";
 import {useState} from "react";
 
-const Profile = ({userObj}) => {
+const Profile = ({refreshUser, userObj}) => {
     const history = useHistory();
     const [newDisplayName, setNewDisplayName] = useState(userObj.displayName);
     const onLogOutClick = () => {
@@ -12,8 +12,6 @@ const Profile = ({userObj}) => {
     }
     const getMyBangWeet = async () => {
           const bangWeets = await dbService.collection("bangWeets").where("creatorId", "==", userObj.uid).orderBy("creatorAt").get();
-
-          console.log(bangWeets.docs.map((doc) => doc.data()));
     };
     const onChange = (event) => {
         const {target:{value}} = event;
@@ -25,6 +23,7 @@ const Profile = ({userObj}) => {
              await  userObj.updateProfile({
                 displayName: newDisplayName
             });
+             refreshUser();
         }
     }
 
