@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/bangwitter/static/css/main.4dffa0c7.chunk.css",
+    "main.js": "/bangwitter/static/js/main.c75f2f05.chunk.js",
+    "main.js.map": "/bangwitter/static/js/main.c75f2f05.chunk.js.map",
+    "runtime-main.js": "/bangwitter/static/js/runtime-main.f8a77c31.js",
+    "runtime-main.js.map": "/bangwitter/static/js/runtime-main.f8a77c31.js.map",
+    "static/js/2.0433debe.chunk.js": "/bangwitter/static/js/2.0433debe.chunk.js",
+    "static/js/2.0433debe.chunk.js.map": "/bangwitter/static/js/2.0433debe.chunk.js.map",
+    "index.html": "/bangwitter/index.html",
+    "static/css/main.4dffa0c7.chunk.css.map": "/bangwitter/static/css/main.4dffa0c7.chunk.css.map",
+    "static/js/2.0433debe.chunk.js.LICENSE.txt": "/bangwitter/static/js/2.0433debe.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f8a77c31.js",
+    "static/js/2.0433debe.chunk.js",
+    "static/css/main.4dffa0c7.chunk.css",
+    "static/js/main.c75f2f05.chunk.js"
+  ]
+}
